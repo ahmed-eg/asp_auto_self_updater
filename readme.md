@@ -1,10 +1,9 @@
 ﻿
-
 # ASP Auto Self-Update
 
 Designed for ASP Core application for Self-Update 
 
-working as following:
+## Working as follow:
 
 - Check for update by calling HTTP GET API
 - Check the curent DLL version for target .Net Core application.
@@ -15,3 +14,9 @@ working as following:
 - Copy the files.
 - Remove the "app_offline.htm"
 - abort
+
+## Tested ont the following platforms:
+
+- Windows IIS
+- Linux dotnet command
+- Docker (Not yet working)

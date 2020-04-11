@@ -10,5 +10,5 @@
 **/**.exe
 **/**.pdb
 **/**.runtimeconfig.json
-AspUpdater.deps.json
+deploy.cmd
 **/**.zip

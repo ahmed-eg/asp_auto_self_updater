@@ -6,6 +6,12 @@
     <Authors>Ahmed El-Araby</Authors>
     <Company>Tecfy.co</Company>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <PackageProjectUrl>https://github.com/ahmed-eg/asp_auto_self_updater</PackageProjectUrl>
+    <Copyright>Tecfy.co 2020</Copyright>
+    <RepositoryUrl>https://github.com/ahmed-eg/asp_auto_self_updater</RepositoryUrl>
+    <RepositoryType>Public</RepositoryType>
+    <Description>Auto Self-Update for ASP Core Applications</Description>
+    <Version>1.0.1</Version>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
