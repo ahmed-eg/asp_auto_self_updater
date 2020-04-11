@@ -1,0 +1,78 @@
+name: 1.0.$(DayOfYear)$(rev:.r)
+
+trigger:
+- master
+
+pool:
+  vmImage: 'ubuntu-latest'
+
+variables:
+  buildConfiguration: 'Release'
+
+steps:
+- script: echo $(Build.BuildNumber)
+
+- task: Assembly-Info-NetCore@2
+  displayName: 'Update the Version Number to $(Build.BuildNumber)'
+  inputs:
+    Path: '$(Build.SourcesDirectory)/TecfyCore.Api'
+    FileNames: 'TecfyCore.Api.csproj'
+    InsertAttributes: true
+    FileEncoding: 'auto'
+    WriteBOM: false
+    Authors: 'Ahmed El-Araby'
+    Company: 'Tecfy.co'
+    Product: 'Tecfy Core Package'
+    Copyright: '2020 Tecfy.co'
+    VersionNumber: '$(Build.BuildNumber)'
+    FileVersionNumber: '$(Build.BuildNumber)'
+    PackageVersion: '$(Build.BuildNumber)'
+    LogLevel: 'verbose'
+    FailOnWarning: false
+    DisableTelemetry: false
+
+# - task: DotNetCoreCLI@2
+#   displayName: 'Run the unit tests'
+#   inputs:
+#     command: 'test'
+#     projects: 'TecfyCore.Api.Tests/TecfyCore.Api.Tests.csproj'
+
+- script: dotnet build /t:pack --configuration $(buildConfiguration)
+  displayName: 'Build the package'
+
+# - task: PublishTestResults@2
+#   inputs:
+#     testResultsFormat: 'VSTest'
+#     testResultsFiles: 'TecfyCore.Api.Tests*.xml'
+
+- task: CopyFiles@2
+  displayName: 'Copy the result file'
+  inputs:
+    sourceFolder: $(Build.SourcesDirectory)/TecfyCore.Api/bin
+    targetFolder: $(Build.ArtifactStagingDirectory)
+
+# - task: NuGetCommand@2
+#   inputs:
+#     command: 'push'
+#     packagesToPush: '$(Build.ArtifactStagingDirectory)/**/*.nupkg;!$(Build.ArtifactStagingDirectory)/**/*.symbols.nupkg'
+#     nuGetFeedType: 'internal'
+#     publishVstsFeed: '30f0031e-9009-4db2-93d0-f81bca1326b9'
+
+- task: NuGetCommand@2
+  displayName: 'push the package to Public NuGet'
+  inputs:
+    command: 'push'
+    packagesToPush: '$(Build.ArtifactStagingDirectory)/**/*.nupkg;!$(Build.ArtifactStagingDirectory)/**/*.symbols.nupkg'
+    nuGetFeedType: 'external'
+    publishFeedCredentials: 'Tecfy.co NuGet'
+    
+# - task: CopyFiles@2
+#   inputs:
+#     sourceFolder: $(Build.SourcesDirectory)/TecfyCore.Api/bin/Release/netcoreapp2.1
+#     targetFolder: $(Build.ArtifactStagingDirectory)
+
+# - task: PublishBuildArtifacts@1
+#   inputs:
+#     PathtoPublish: '$(Build.ArtifactStagingDirectory)'
+#     ArtifactName: 'drop'
+#     publishLocation: 'Container'
