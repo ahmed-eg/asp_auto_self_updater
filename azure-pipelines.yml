@@ -15,8 +15,8 @@ steps:
 - task: Assembly-Info-NetCore@2
   displayName: 'Update the Version Number to $(Build.BuildNumber)'
   inputs:
-    Path: '$(Build.SourcesDirectory)/TecfyCore.Api'
-    FileNames: 'TecfyCore.Api.csproj'
+    Path: '$(Build.SourcesDirectory)'
+    FileNames: 'AspAutoSelfUpdater.csproj'
     InsertAttributes: true
     FileEncoding: 'auto'
     WriteBOM: false
@@ -43,17 +43,17 @@ steps:
 - task: CopyFiles@2
   displayName: 'Copy the result file'
   inputs:
-    sourceFolder: $(Build.SourcesDirectory)/TecfyCore.Api/bin
+    sourceFolder: $(Build.SourcesDirectory)/bin
     targetFolder: $(Build.ArtifactStagingDirectory)
 
 
-# - task: NuGetCommand@2
-#   displayName: 'push the package to Public NuGet'
-#   inputs:
-#     command: 'push'
-#     packagesToPush: '$(Build.ArtifactStagingDirectory)/**/*.nupkg;!$(Build.ArtifactStagingDirectory)/**/*.symbols.nupkg'
-#     nuGetFeedType: 'external'
-#     publishFeedCredentials: 'Tecfy.co NuGet'
+- task: NuGetCommand@2
+  displayName: 'push the package to Public NuGet'
+  inputs:
+    command: 'push'
+    packagesToPush: '$(Build.ArtifactStagingDirectory)/**/*.nupkg;!$(Build.ArtifactStagingDirectory)/**/*.symbols.nupkg'
+    nuGetFeedType: 'external'
+    publishFeedCredentials: 'Tecfy.co NuGet'
     
 # - task: CopyFiles@2
 #   inputs:
