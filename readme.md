@@ -21,5 +21,7 @@ Designed for ASP Core application for Self-Update
 - Linux dotnet command
 - Docker (Not yet working)
 
-- [Ahmed El-Araby](https://github.com/ahmed-eg)
-- [LICENSE](https://github.com/ahmed-eg/asp_auto_self_updater/blob/master/LICENSE)
+
+[Ahmed El-Araby](https://github.com/ahmed-eg)
+
+[LICENSE](https://github.com/ahmed-eg/asp_auto_self_updater/blob/master/LICENSE)
