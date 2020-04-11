@@ -1,5 +1,6 @@
 {
   "TargetAssemblyName": "TecfyMarket.dll",
+  "CheckIntervalSeconds": 3600,
   "GetVersion": {
     "Url": "http://192.168.100.100:5000/api/version",
     "Type": "GET",

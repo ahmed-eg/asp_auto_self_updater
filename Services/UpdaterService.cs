@@ -12,6 +12,7 @@ namespace AspAutoSelfUpdater.Services
     {
 
         static string UpdateFilePath => "update_files";
+        private static int FailCounter = 0;
 
         public static bool CheckNewVersion() {
             var setting = SettingService.Setting;
@@ -41,7 +42,8 @@ namespace AspAutoSelfUpdater.Services
         {
             try
             {
-                
+                Console.WriteLine("Start Updating...");
+
                 if (!Directory.Exists(UpdateFilePath))
                 {
                     Console.WriteLine($"Update folder is not exist!!");
@@ -84,12 +86,16 @@ namespace AspAutoSelfUpdater.Services
                 if (File.Exists("app_offline.htm"))
                     File.Delete("app_offline.htm");
 
+                FailCounter = 0;
                 return true;
             }
             catch (Exception ex)
             {
+                FailCounter++;
                 Console.WriteLine(ex.ToString());
                 Console.WriteLine("Will start updating again shortlly...");
+
+                // TODO: when FailCounter > 10 then start the updater.exe in another process and exist this one.
                 return false;
             }
         }
