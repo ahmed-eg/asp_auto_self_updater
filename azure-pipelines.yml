@@ -40,31 +40,20 @@ steps:
 - script: dotnet build /t:pack --configuration $(buildConfiguration)
   displayName: 'Build the package'
 
-# - task: PublishTestResults@2
-#   inputs:
-#     testResultsFormat: 'VSTest'
-#     testResultsFiles: 'TecfyCore.Api.Tests*.xml'
-
 - task: CopyFiles@2
   displayName: 'Copy the result file'
   inputs:
     sourceFolder: $(Build.SourcesDirectory)/TecfyCore.Api/bin
     targetFolder: $(Build.ArtifactStagingDirectory)
 
+
 # - task: NuGetCommand@2
+#   displayName: 'push the package to Public NuGet'
 #   inputs:
 #     command: 'push'
 #     packagesToPush: '$(Build.ArtifactStagingDirectory)/**/*.nupkg;!$(Build.ArtifactStagingDirectory)/**/*.symbols.nupkg'
-#     nuGetFeedType: 'internal'
-#     publishVstsFeed: '30f0031e-9009-4db2-93d0-f81bca1326b9'
-
-- task: NuGetCommand@2
-  displayName: 'push the package to Public NuGet'
-  inputs:
-    command: 'push'
-    packagesToPush: '$(Build.ArtifactStagingDirectory)/**/*.nupkg;!$(Build.ArtifactStagingDirectory)/**/*.symbols.nupkg'
-    nuGetFeedType: 'external'
-    publishFeedCredentials: 'Tecfy.co NuGet'
+#     nuGetFeedType: 'external'
+#     publishFeedCredentials: 'Tecfy.co NuGet'
     
 # - task: CopyFiles@2
 #   inputs:
