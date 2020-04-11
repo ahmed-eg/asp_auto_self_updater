@@ -1,0 +1,14 @@
+# See http://help.github.com/ignore-files/ for more about ignoring files.
+
+
+/.vs/
+**/obj/
+**/bin/
+/obj/
+/bin/
+**/**.dll
+**/**.exe
+**/**.pdb
+**/**.runtimeconfig.json
+AspUpdater.deps.json
+**/**.zip

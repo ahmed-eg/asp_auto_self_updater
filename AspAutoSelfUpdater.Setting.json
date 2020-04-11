@@ -1,0 +1,13 @@
+{
+  "TargetAssemblyName": "TecfyMarket.dll",
+  "GetVersion": {
+    "Url": "http://192.168.100.100:5000/api/version",
+    "Type": "GET",
+    "Payload": null
+  },
+  "GetZipFile": {
+    "Url": "http://192.168.100.100:5000/api/version/download",
+    "Type": "GET",
+    "Payload": null
+  }
+}
